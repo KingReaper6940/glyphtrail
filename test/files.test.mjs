@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {scan} from '../src/scan.mjs';import {EXAMPLE,projectJSON,parseProject,reportJSON,reportCSV} from '../src/files.mjs';
+test('fictional example has eight curated observations across six categories',()=>{const r=scan(EXAMPLE);assert.equal(r.hitCount,8);assert.equal(r.counts['zero-width'],3);assert.equal(r.counts.bidi,2);assert.equal(r.lines,7);});
+test('project round-trip preserves all original code points',()=>assert.deepEqual(parseProject(projectJSON(EXAMPLE,false)),{text:EXAMPLE,includeLayout:false}));
+test('metadata reports contain positions but no surrounding source prose',()=>{const r=scan('privateword\u200b');const json=reportJSON(r),csv=reportCSV(r);assert.ok(!json.includes('privateword'));assert.ok(!csv.includes('privateword'));assert.ok(csv.includes('U+200B'));assert.equal(JSON.parse(json).records[0].utf16Start,11);});
+test('invalid and excessive project input is rejected',()=>{for(const value of ['{','null','{}',' '.repeat(500001)])assert.throws(()=>parseProject(value));assert.throws(()=>projectJSON('a','yes'));});
