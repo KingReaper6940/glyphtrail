@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {classify} from '../src/catalog.mjs';import {scan} from '../src/scan.mjs';
+test('ASCII without selected layout characters has no curated hits',()=>{const r=scan('hello world\n');assert.equal(r.hitCount,0);assert.equal(r.lines,2);});
+test('UTF-16, byte and code-point offsets diverge correctly after emoji',()=>{const r=scan('🙂\u200bA');const hit=r.records[0];assert.deepEqual([hit.utf16Start,hit.byteStart,hit.codePointIndex,hit.line,hit.column],[2,4,1,1,2]);assert.equal(r.utf8Bytes,8);});
+test('CRLF counts as one line break with code-point columns',()=>{const r=scan('A\r\n\u00a0B\rC\n',{includeLayout:true});assert.equal(r.lines,4);const nbsp=r.records.find(p=>p.code==='U+00A0');assert.equal(nbsp.line,2);assert.equal(nbsp.column,1);assert.equal(r.records.find(p=>p.code==='U+000A').line,1);});
+test('joiners and selectors are reported without being treated as errors',()=>{const r=scan('👩‍💻 ❤️');assert.equal(r.counts.joiner,1);assert.equal(r.counts.selector,1);assert.equal(classify(0xe0061).group,'tag');});
+test('retention is explicit while totals cover the whole input',()=>{const r=scan('\u200b'.repeat(1200));assert.equal(r.hitCount,1200);assert.equal(r.retained,1000);assert.equal(r.omitted,200);assert.equal(r.counts['zero-width'],1200);});
+test('invalid and excessive inputs fail before inspection',()=>{assert.throws(()=>scan('a'.repeat(50001)));assert.throws(()=>scan('\ud800'));assert.throws(()=>scan('x',{includeLayout:'yes'}));});
