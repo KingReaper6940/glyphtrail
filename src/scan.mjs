@@ -7,7 +7,7 @@ export function scan(text,{includeLayout=false}={}){
  const encoder=new TextEncoder();
  for(const char of text){const cp=char.codePointAt(0),bytes=encoder.encode(char).length,hit=classify(cp,includeLayout);
   if(hit){counts[hit.group]++;total++;if(records.length<MAX_RECORDS)records.push({...hit,utf16Start:utf16,utf16End:utf16+char.length,byteStart:byte,byteEnd:byte+bytes,codePointIndex:index,line,column});}
-  if(cp===10||(cp===13&&text[utf16+1]!=='\n')){line++;column=1;}else column++;
+  if(cp===10||cp===0x2028||cp===0x2029||(cp===13&&text[utf16+1]!=='\n')){line++;column=1;}else column++;
   utf16+=char.length;byte+=bytes;index++;
  }
  return {format:'glyphtrail-report-v1',includeLayout,utf16Units:text.length,utf8Bytes:byte,codePoints:index,lines:line,hitCount:total,retained:records.length,omitted:total-records.length,counts,records};

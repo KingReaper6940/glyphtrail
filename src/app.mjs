@@ -42,7 +42,7 @@ function initializeExports(){
  ['save-project','Editable project ↓','glyphtrail-project.json','application/json',()=>projectJSON($('source').value,report.includeLayout)]]){
   const button=el('button','',label);button.id=id;button.addEventListener('click',()=>{if(report)download(content(),name,type);});slot.append(button);
  }
- slot.append(el('p','help','JSON and CSV include all retained entries, independent of the table filter, and disclose omitted counts. CSV does not include summary counts; use JSON for the full inspection totals. Annotated text covers the full input, including text omitted from the on-screen preview. It is not a reversible encoding or a substitute for your original.'));
+ slot.append(el('p','help','JSON and CSV include all retained entries, independent of the table filter. JSON discloses whole-input totals and omitted counts; CSV is a record table without summary counts. Annotated text covers the full input, including text omitted from the on-screen preview. It is not a reversible encoding or a substitute for your original.'));
  for(const [id,title,label] of [['report-preview','Inspect metadata report JSON','Metadata report JSON'],['project-preview','Inspect editable project JSON','Editable project JSON']]){
   const details=el('details'),summary=el('summary','',title),area=el('textarea');area.id=id;area.readOnly=true;area.setAttribute('aria-label',label);details.append(summary,area);slot.append(details);
  }

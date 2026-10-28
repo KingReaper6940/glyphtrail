@@ -5,7 +5,7 @@ export function reportCSV(report){
  const rows=[['code','description','category','utf16_start','utf16_end','byte_start','byte_end','codepoint_index','line','column'],...report.records.map(r=>[r.code,r.name,r.group,r.utf16Start,r.utf16End,r.byteStart,r.byteEnd,r.codePointIndex,r.line,r.column])];
  return rows.map(row=>row.map(value=>'"'+String(value).replaceAll('"','""')+'"').join(',')).join('\r\n')+'\r\n';
 }
-export function projectJSON(text,includeLayout){validate(text);if(typeof includeLayout!=='boolean')throw new Error('Choose layout inspection on or off.');return JSON.stringify({format:'glyphtrail-project-v1',text,includeLayout},null,2)+'\n';}
+export function projectJSON(text,includeLayout){validate(text);if(typeof includeLayout!=='boolean')throw new Error('Choose layout inspection on or off.');return JSON.stringify({format:'glyphtrail-project-v1',text,includeLayout},null,2).replace(/[\u007f-\uffff]/g,char=>'\\u'+char.charCodeAt(0).toString(16).padStart(4,'0'))+'\n';}
 export function parseProject(text){
  if(typeof text!=='string'||text.length>500000)throw new Error('Project JSON must be at most 500,000 UTF-16 units.');
  let p;try{p=JSON.parse(text);}catch{throw new Error('Project is not valid JSON.');}

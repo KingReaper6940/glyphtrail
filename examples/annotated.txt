@@ -1,0 +1,6 @@
+Order⟦U+00A0⟧ready
+copy⟦U+200B⟧paste
+Emoji: 👩⟦U+200D⟧💻 ❤⟦U+FE0F⟧
+Direction: ⟦U+2067⟧abc⟦U+2069⟧
+Soft⟦U+00AD⟧hyphen
+BOM: ⟦U+FEFF⟧end

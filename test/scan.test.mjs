@@ -10,3 +10,11 @@ import {annotate,preview} from '../src/annotate.mjs';
 test('annotation exposes selected code points without changing the source string',()=>{const source='A\u200bB\u00a0C';assert.equal(annotate(source),'A⟦U+200B⟧B⟦U+00A0⟧C');assert.equal(source,'A\u200bB\u00a0C');assert.equal(annotate('A B\n'),'A B\n');});
 test('ordinary layout annotation preserves actual line breaks',()=>{assert.equal(annotate('A\tB\n',{includeLayout:true}),'A⟦U+0009⟧B⟦U+000A⟧\n');});
 test('preview discloses truncation and never cuts a surrogate pair',()=>{const r=preview('a'.repeat(3999)+'🙂B');assert.equal(r.shownUnits,3999);assert.equal(r.omittedUnits,3);assert.equal(r.text,'a'.repeat(3999));});
+
+test('Unicode separators advance line positions and CRLF annotation stays one break',()=>{const r=scan('A\u2028\u200b\u2029\u00a0');assert.equal(r.lines,3);assert.equal(r.records.find(x=>x.code==='U+200B').line,2);assert.equal(r.records.find(x=>x.code==='U+00A0').line,3);assert.equal(annotate('A\r\nB',{includeLayout:true}),'A⟦U+000D⟧⟦U+000A⟧\r\nB');});
+test('48 mixed strings agree with independent prefix byte measurements',()=>{
+ const choices=['a','🙂','界','\u200b','\u2067','\u00a0','\n','\u200d','\ufe0f'];let seed=73;
+ for(let run=0;run<48;run++){let source='';for(let i=0;i<80;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;source+=choices[seed%choices.length];}const r=scan(source);
+ assert.equal(r.utf8Bytes,new TextEncoder().encode(source).length);assert.equal(r.codePoints,Array.from(source).length);assert.equal(Object.values(r.counts).reduce((a,b)=>a+b,0),r.hitCount);
+ for(const hit of r.records){assert.equal(new TextEncoder().encode(source.slice(0,hit.utf16Start)).length,hit.byteStart);assert.equal(Array.from(source.slice(0,hit.utf16Start)).length,hit.codePointIndex);assert.equal(source.codePointAt(hit.utf16Start).toString(16).toUpperCase().padStart(4,'0'),hit.code.slice(2));}}
+});

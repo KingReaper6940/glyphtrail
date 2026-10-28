@@ -1,0 +1,119 @@
+{
+  "format": "glyphtrail-report-v1",
+  "includeLayout": false,
+  "utf16Units": 78,
+  "utf8Bytes": 98,
+  "codePoints": 76,
+  "lines": 7,
+  "hitCount": 8,
+  "retained": 8,
+  "omitted": 0,
+  "counts": {
+    "zero-width": 3,
+    "joiner": 1,
+    "bidi": 2,
+    "space": 1,
+    "selector": 1,
+    "tag": 0,
+    "control": 0,
+    "layout": 0
+  },
+  "records": [
+    {
+      "group": "space",
+      "name": "No-break space",
+      "code": "U+00A0",
+      "utf16Start": 5,
+      "utf16End": 6,
+      "byteStart": 5,
+      "byteEnd": 7,
+      "codePointIndex": 5,
+      "line": 1,
+      "column": 6
+    },
+    {
+      "group": "zero-width",
+      "name": "Zero-width space",
+      "code": "U+200B",
+      "utf16Start": 16,
+      "utf16End": 17,
+      "byteStart": 17,
+      "byteEnd": 20,
+      "codePointIndex": 16,
+      "line": 2,
+      "column": 5
+    },
+    {
+      "group": "joiner",
+      "name": "Zero-width joiner",
+      "code": "U+200D",
+      "utf16Start": 32,
+      "utf16End": 33,
+      "byteStart": 37,
+      "byteEnd": 40,
+      "codePointIndex": 31,
+      "line": 3,
+      "column": 9
+    },
+    {
+      "group": "selector",
+      "name": "Variation selector",
+      "code": "U+FE0F",
+      "utf16Start": 37,
+      "utf16End": 38,
+      "byteStart": 48,
+      "byteEnd": 51,
+      "codePointIndex": 35,
+      "line": 3,
+      "column": 13
+    },
+    {
+      "group": "bidi",
+      "name": "Right-to-left isolate",
+      "code": "U+2067",
+      "utf16Start": 50,
+      "utf16End": 51,
+      "byteStart": 63,
+      "byteEnd": 66,
+      "codePointIndex": 48,
+      "line": 4,
+      "column": 12
+    },
+    {
+      "group": "bidi",
+      "name": "Pop directional isolate",
+      "code": "U+2069",
+      "utf16Start": 54,
+      "utf16End": 55,
+      "byteStart": 69,
+      "byteEnd": 72,
+      "codePointIndex": 52,
+      "line": 4,
+      "column": 16
+    },
+    {
+      "group": "zero-width",
+      "name": "Soft hyphen",
+      "code": "U+00AD",
+      "utf16Start": 60,
+      "utf16End": 61,
+      "byteStart": 77,
+      "byteEnd": 79,
+      "codePointIndex": 58,
+      "line": 5,
+      "column": 5
+    },
+    {
+      "group": "zero-width",
+      "name": "Byte-order mark / zero-width no-break space",
+      "code": "U+FEFF",
+      "utf16Start": 73,
+      "utf16End": 74,
+      "byteStart": 91,
+      "byteEnd": 94,
+      "codePointIndex": 71,
+      "line": 6,
+      "column": 6
+    }
+  ]
+}

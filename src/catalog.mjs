@@ -6,7 +6,7 @@ const points=new Map([
  [0x200e,['bidi','Left-to-right mark']],[0x200f,['bidi','Right-to-left mark']],
  [0x202a,['bidi','Left-to-right embedding']],[0x202b,['bidi','Right-to-left embedding']],[0x202c,['bidi','Pop directional formatting']],
  [0x202d,['bidi','Left-to-right override']],[0x202e,['bidi','Right-to-left override']],
- [0x202f,['space','Narrow no-break space']],[0x205f,['space','Medium mathematical space']],
+ [0x2028,['space','Line separator']],[0x2029,['space','Paragraph separator']],[0x202f,['space','Narrow no-break space']],[0x205f,['space','Medium mathematical space']],
  [0x2060,['zero-width','Word joiner']],[0x2066,['bidi','Left-to-right isolate']],[0x2067,['bidi','Right-to-left isolate']],
  [0x2068,['bidi','First strong isolate']],[0x2069,['bidi','Pop directional isolate']],
  [0x3000,['space','Ideographic space']],[0xfeff,['zero-width','Byte-order mark / zero-width no-break space']]
