@@ -1,5 +1,7 @@
 # Glyphtrail
 
+[Open Glyphtrail](https://glyphtrail.vercel.app)
+
 **Make the unseen easier to read.**
 
 Inspect a curated set of invisible Unicode characters, unusual spaces, joiners, selectors, and direction controls. See exact positions and an annotated reading copy without automatically deleting or normalizing the source.
